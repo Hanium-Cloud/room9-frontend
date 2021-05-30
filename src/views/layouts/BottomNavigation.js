@@ -48,11 +48,6 @@ const BottomNavigation = (props) => {
             </BottomItem>
         )
       }
-
-      {/*<BottomItem><SearchOutlined style={{fontSize: '20px'}} /></BottomItem>*/}
-      {/*<BottomItem><HeartOutlined style={{fontSize: '20px'}} /></BottomItem>*/}
-      {/*<BottomItem><MailOutlined style={{fontSize: '20px'}} /></BottomItem>*/}
-      {/*<BottomItem><UserOutlined style={{fontSize: '20px'}} /></BottomItem>*/}
     </BottomContainer>
   );
 }
