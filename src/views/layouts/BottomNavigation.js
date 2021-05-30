@@ -4,12 +4,12 @@ import {useHistory, useLocation} from 'react-router-dom';
 import Color from "../../constant/Color";
 
 const BottomContainer = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
   height: 70px;
-  border-top: 2px solid #fafafa;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 99;
   display: flex;
@@ -34,14 +34,18 @@ const BottomNavigation = (props) => {
     {path: '/like', icon: HeartOutlined},
     {path: '/message', icon: MailOutlined},
     {path: '/mypage', icon: UserOutlined},
-  ]
+  ];
+
+  const goTo = (path) => {
+    history.replace(path);
+  }
 
   return (
     <BottomContainer>
       {
         items.map((item) =>
-            <BottomItem>
-              <item.icon onClick={() => history.push(item.path)} style={{
+            <BottomItem onClick={() => goTo(item.path)}>
+              <item.icon style={{
                   fontSize: '20px',
                   color: item.path === location.pathname ? Color.Primary : 'rgba(0, 0, 0, 0.85)'
                 }} />
