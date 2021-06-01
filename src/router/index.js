@@ -15,7 +15,7 @@ export default function Router() {
       <PrivateRoute exact path="/like" component={Like} />
       <PrivateRoute exact path="/message" component={Message} />
       <PrivateRoute exact path="/mypage" component={MyPage} />
-      <Redirect to="/signin" />
+      <Redirect to="/" />
     </BrowserRouter>
   )
 }
