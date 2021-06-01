@@ -3,7 +3,6 @@ import {RecoilRoot} from "recoil";
 import Router from "./router";
 import styled from "styled-components";
 import AppHeader from "./views/layouts/AppHeader";
-import BottomNavigation from "./views/layouts/BottomNavigation";
 
 const AppContainer = styled.div`
   width: 100%;
