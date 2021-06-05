@@ -31,10 +31,10 @@ const BottomNavigation = (props) => {
   console.log(location);
 
   const items = [
-    {path: '/', icon: SearchOutlined},
-    {path: '/like', icon: HeartOutlined},
-    {path: '/message', icon: MailOutlined},
-    {path: '/mypage', icon: UserOutlined},
+    {path: '/', icon: SearchOutlined, name: '검색'},
+    {path: '/like', icon: HeartOutlined, name: '찜'},
+    {path: '/message', icon: MailOutlined, name: '메시지'},
+    {path: '/mypage', icon: UserOutlined, name: '마이페이지'},
   ];
 
   const goTo = (path) => {
@@ -48,8 +48,13 @@ const BottomNavigation = (props) => {
             <BottomItem key={idx} onClick={() => goTo(item.path)}>
               <item.icon style={{
                   fontSize: '20px',
-                  color: item.path === location.pathname ? Color.Primary : 'rgba(0, 0, 0, 0.85)'
+                  color: item.path === location.pathname ? Color.Primary : 'rgba(0, 0, 0, 0.85)',
+                  display: 'block',
                 }} />
+              <span style={{
+                fontSize: '10px',
+                color: item.path === location.pathname ? Color.Primary : 'rgba(0, 0, 0, 0.85)',
+              }}>{item.name}</span>
             </BottomItem>
         )
       }
