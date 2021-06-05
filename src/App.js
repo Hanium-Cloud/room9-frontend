@@ -16,7 +16,7 @@ function App() {
   return (
     <RecoilRoot>
       <AppContainer>
-        <AppHeader />
+        {/*<AppHeader />*/}
         <Router />
       </AppContainer>
     </RecoilRoot>

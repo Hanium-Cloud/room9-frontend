@@ -43,8 +43,8 @@ const BottomNavigation = (props) => {
   return (
     <BottomContainer>
       {
-        items.map((item) =>
-            <BottomItem onClick={() => goTo(item.path)}>
+        items.map((item, idx) =>
+            <BottomItem key={idx} onClick={() => goTo(item.path)}>
               <item.icon style={{
                   fontSize: '20px',
                   color: item.path === location.pathname ? Color.Primary : 'rgba(0, 0, 0, 0.85)'
