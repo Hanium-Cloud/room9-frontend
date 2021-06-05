@@ -10,11 +10,12 @@ const BottomContainer = styled.div`
   max-width: 550px;
   margin: 0 auto;
   height: 70px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.9); 
   z-index: 99;
   display: flex;
   flex-direction: row;
   align-items: center;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
 `;
 
 const BottomItem = styled.div`

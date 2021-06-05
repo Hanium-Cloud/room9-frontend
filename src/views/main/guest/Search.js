@@ -5,6 +5,7 @@ import BannerCarousel from "../../components/BannerCarousel";
 import MockData from "../../../constant/MockData";
 import Review from "../room/Review";
 import BannerText from "../../components/BannerText";
+import RoomCard from "../room/RoomCard";
 
 const mainTextContainer = {
   marginTop: '10px',
@@ -17,11 +18,11 @@ const Search = (props) => {
     <>
       <Row>
         <Col span={24} style={{padding: '15px', backgroundColor: Color.Primary} }>
-          <Input size="large" style={{borderRadius: '25px'}} prefix={<SearchOutlined />} placeholder="hello, world"/>
+          <Input size="large" style={{borderRadius: '25px'}} prefix={<SearchOutlined style={{color: '#888888'}}/>} placeholder="마음에 드는 숙소를 찾아보세요!"/>
         </Col>
       </Row>
       <Row>
-        <Col span={24} style={{height: '1000px', backgroundColor: Color.White}}>
+        <Col span={24} style={{backgroundColor: Color.White}}>
 
           {/*캐러셀 => 숙소 랜덤으로 뿌려주기*/}
           <BannerCarousel mock={true} />
@@ -34,7 +35,20 @@ const Search = (props) => {
           <div style={{marginTop: '15px',}}>
             {
               MockData.ReviewDataMock.map((item) => (
-                <Review review={item} />
+                <Review review={item} card={true} />
+              ))
+            }
+          </div>
+
+          {/*숙소 카드 => 현재 인기있는 숙소 보여주기*/}
+          <BannerText
+            title="요즘 인기있는 숙소!"
+            content="인기있는 숙소를 둘러보고 예약을 해보세요"
+          />
+          <div style={{marginTop: '15px'}}>
+            {
+              MockData.RoomCardMock.map((item) => (
+                <RoomCard room={item} />
               ))
             }
           </div>

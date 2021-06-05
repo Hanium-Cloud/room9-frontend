@@ -3,19 +3,19 @@ import Fallback from "../../../constant/Fallback";
 import Score from "./Score";
 
 const reviewContainer = {
-  padding: '10px',
+  padding: '10px 20px',
 }
 
 const cardReviewStyle = {
   borderRadius: '10px',
   boxShadow: '0px 0px 3px 3px rgba(0, 0, 0, .1)',
-  padding: '0 10px',
+  padding: '0 15px',
 };
 
 const Review = (props) => {
   return (
     <div style={reviewContainer}>
-      <div style={cardReviewStyle}>
+      <div style={props?.card ? cardReviewStyle : null}>
         <Comment
           author={
             <>
@@ -27,7 +27,7 @@ const Review = (props) => {
           content={
             <>
               <h5 style={{fontWeight: 'bold'}}>{props?.review?.title}</h5>
-              <p>{props?.review.content.substr(0, 120)}</p>
+              <p>{props?.review.content}</p>
             </>
           }
         />

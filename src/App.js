@@ -7,9 +7,13 @@ import AppHeader from "./views/layouts/AppHeader";
 const AppContainer = styled.div`
   width: 100%;
   max-width: 550px;
-  height: 100vh;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 function App() {

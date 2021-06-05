@@ -17,7 +17,7 @@ const PrivateRoute = ({component: Component, ...parentProps}) => {
       {...parentProps}
       render={props => (
         checkAuth() ? (
-          <div>
+          <div style={{paddingBottom: '70px'}}>
             <Component {...props} />
             <BottomNavigation />
           </div>
