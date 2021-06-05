@@ -1,7 +1,7 @@
 import {EnvironmentOutlined, StarFilled} from "@ant-design/icons";
 
 const Container = {
-  padding: '10px',
+  padding: '10px 20px',
   overflow: 'hidden',
 }
 

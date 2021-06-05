@@ -4,6 +4,7 @@ import {Button} from "antd";
 import {useSetRecoilState} from "recoil";
 import {userState} from "../../store/state";
 import {useHistory} from 'react-router-dom';
+import {UserType} from "../../constant/User";
 
 const BackGround = styled.div`
   background-color: #049FFF;
@@ -40,12 +41,13 @@ const SignIn = (props) => {
   const setUser = useSetRecoilState(userState);
   const history = useHistory();
 
-  const login = async () => {
+  const login = async (type) => {
     // TODO 로그인 API 연동, 현재는 스터빙 해놓음
     await setUser({
       isLogin: true,
       name: 'testUser',
       email: 'testEmail@test.com',
+      type: type
     });
 
     history.push('/');
@@ -58,7 +60,9 @@ const SignIn = (props) => {
         <LogoSubscription>room9에서 마음에 드는 숙소를 찾아보세요</LogoSubscription>
       </LogoContainer>
       <ButtonContainer>
-        <Button block onClick={() => login()}>Kakao로 로그인</Button>
+        밑에는 테스트고 실제로 버튼은 하나일거임.
+        <Button block onClick={() => login(UserType.Guest)}>Kakao로 로그인 guest</Button>
+        <Button block onClick={() => login(UserType.Host)}>Kakao로 로그인 host</Button>
       </ButtonContainer>
     </BackGround>
   )

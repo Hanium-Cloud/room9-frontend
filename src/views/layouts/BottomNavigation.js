@@ -1,7 +1,17 @@
 import styled from "styled-components";
-import {HeartOutlined, MailOutlined, SearchOutlined, UserOutlined} from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  HeartOutlined,
+  HomeOutlined,
+  MailOutlined,
+  SearchOutlined,
+  UserOutlined
+} from "@ant-design/icons";
 import {useHistory, useLocation} from 'react-router-dom';
 import Color from "../../constant/Color";
+import {useRecoilValue} from "recoil";
+import {userState} from "../../store/state";
+import {UserType} from "../../constant/User";
 
 const BottomContainer = styled.div`
   position: fixed;
@@ -23,28 +33,35 @@ const BottomItem = styled.div`
   text-align: center;
 `;
 
+const guestItems = [
+  {path: '/', icon: SearchOutlined, name: '검색'},
+  {path: '/like', icon: HeartOutlined, name: '찜'},
+  {path: '/message', icon: MailOutlined, name: '메시지'},
+  {path: '/mypage', icon: UserOutlined, name: '마이페이지'},
+];
+
+const hostItems = [
+  {path: '/myroom', icon: HomeOutlined, name: '내 숙소'},
+  {path: '/reservation/host', icon: CheckCircleOutlined, name: '내 숙소'},
+  {path: '/message', icon: MailOutlined, name: '메시지'},
+  {path: '/mypage', icon: UserOutlined, name: '마이페이지'},
+];
 
 const BottomNavigation = (props) => {
   const location = useLocation();
   const history = useHistory();
-
-  console.log(location);
-
-  const items = [
-    {path: '/', icon: SearchOutlined, name: '검색'},
-    {path: '/like', icon: HeartOutlined, name: '찜'},
-    {path: '/message', icon: MailOutlined, name: '메시지'},
-    {path: '/mypage', icon: UserOutlined, name: '마이페이지'},
-  ];
+  const user = useRecoilValue(userState);
 
   const goTo = (path) => {
     history.replace(path);
   }
 
+  let items = user.type === UserType.Guest ? guestItems : hostItems;
+
   return (
     <BottomContainer>
       {
-        items.map((item, idx) =>
+          items.map((item, idx) =>
             <BottomItem key={idx} onClick={() => goTo(item.path)}>
               <item.icon style={{
                   fontSize: '20px',

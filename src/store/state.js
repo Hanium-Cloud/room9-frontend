@@ -6,6 +6,7 @@ const userState = atom({
     isLogin: false,
     name: '',
     email: '',
+    type: 'guest',
   }
 });
 

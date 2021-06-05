@@ -1,15 +1,12 @@
+import Color from "../../constant/Color";
 
 const ContainerStyle = {
-  marginTop: '20px',
   textAlign: 'center',
-}
-
-const ContainerShadowStyle = {
-  boxShadow: '0 0 3px 3px rgba(0, 0, 0, 0.1)',
+  padding: '10px 0 0 0',
 }
 
 const TitleStyle = {
-  fontSize: '20px',
+  fontSize: '16px',
   fontWeight: 'bold',
   margin: '0',
 }
@@ -20,14 +17,15 @@ const ContentStyle = {
   color: '#888888',
 }
 
-const BannerText = (props) => {
+
+const PageHeader = (props) => {
 
   return (
     <div style={ContainerStyle}>
       <h3 style={TitleStyle}>{props?.title}</h3>
       <p style={ContentStyle}>{props?.content}</p>
     </div>
-  );
-}
+  )
+};
 
-export default BannerText;
+export default PageHeader;

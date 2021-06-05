@@ -6,11 +6,11 @@ const Score = (props) => {
   return (
     <span style={{marginLeft: '10px'}}>
       {
-        [1, 2, 3, 4, 5].map((num) => (
+        [1, 2, 3, 4, 5].map((num, idx) => (
           num <= props.value ?
-            <StarFilled style={{color: "#F2C94C"}} />
+            <StarFilled key={idx} style={{color: "#F2C94C"}} />
             :
-            <StarOutlined style={{color: "#F2C94C"}} />
+            <StarOutlined key={idx} style={{color: "#F2C94C"}} />
         ))
       }
     </span>

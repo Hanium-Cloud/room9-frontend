@@ -6,6 +6,7 @@ import MockData from "../../../constant/MockData";
 import Review from "../room/Review";
 import BannerText from "../../components/BannerText";
 import RoomCard from "../room/RoomCard";
+import AppHeader from "../../layouts/AppHeader";
 
 const mainTextContainer = {
   marginTop: '10px',
@@ -16,6 +17,7 @@ const mainTextContainer = {
 const Search = (props) => {
   return (
     <>
+      <AppHeader />
       <Row>
         <Col span={24} style={{padding: '15px', backgroundColor: Color.Primary} }>
           <Input size="large" style={{borderRadius: '25px'}} prefix={<SearchOutlined style={{color: '#888888'}}/>} placeholder="마음에 드는 숙소를 찾아보세요!"/>
@@ -35,7 +37,7 @@ const Search = (props) => {
           <div style={{marginTop: '15px',}}>
             {
               MockData.ReviewDataMock.map((item) => (
-                <Review review={item} card={true} />
+                <Review key={item.reviewId} review={item} card={true} />
               ))
             }
           </div>
@@ -48,7 +50,7 @@ const Search = (props) => {
           <div style={{marginTop: '15px'}}>
             {
               MockData.RoomCardMock.map((item) => (
-                <RoomCard room={item} />
+                <RoomCard key={item.id} room={item} />
               ))
             }
           </div>

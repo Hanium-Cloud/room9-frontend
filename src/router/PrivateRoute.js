@@ -7,9 +7,7 @@ const PrivateRoute = ({component: Component, ...parentProps}) => {
   const user = useRecoilValue(userState);
 
   const checkAuth = () => {
-    console.log('hello');
-    console.log(user);
-    return user.isLogin;
+      return user.isLogin;
   };
 
   return (

@@ -1,10 +1,10 @@
-const avatarUrl1 = 'https://avatars.githubusercontent.com/u/35277854?v=4';
-const avatarUrl2 = 'https://avatars.githubusercontent.com/u/59433441?v=4';
+export const avatarUrl1 = 'https://avatars.githubusercontent.com/u/35277854?v=4';
+export const avatarUrl2 = 'https://avatars.githubusercontent.com/u/59433441?v=4';
 
-const houseImage1 = '/images/mock/house_mock1.jpeg';
-const houseImage2 = '/images/mock/house_mock2.jpeg';
-const houseImage3 = '/images/mock/house_mock3.jpeg';
-const houseImage4 = '/images/mock/house_mock4.jpeg';
+export const houseImage1 = '/images/mock/house_mock1.jpeg';
+export const houseImage2 = '/images/mock/house_mock2.jpeg';
+export const houseImage3 = '/images/mock/house_mock3.jpeg';
+export const houseImage4 = '/images/mock/house_mock4.jpeg';
 
 export default {
   BannerCarouselMockData: [
@@ -53,7 +53,7 @@ export default {
   ],
   RoomCardMock: [
     {
-      'roomId': 1,
+      'id': 1,
       'thumbnailUrl': houseImage1,
       'name': '제주 펜션',
       'region': '제주시',
@@ -62,7 +62,7 @@ export default {
       'reviewCount': 132
     },
     {
-      'roomId': 2,
+      'id': 2,
       'thumbnailUrl': houseImage2,
       'name': '강릉 하늘 오두막',
       'region': '강릉시',
@@ -70,5 +70,19 @@ export default {
       'score': 4.42,
       'reviewCount': 81
     }
-  ]
+  ],
+  mockGuestUser: {
+    avatarUrl: avatarUrl1,
+    name: '아리',
+    type: 'guest',
+    mobile: '01012345678',
+    email: 'test@test.com'
+  },
+  mockHostUser: {
+    avatarUrl: avatarUrl2,
+    name: '블리츠크랭크',
+    type: 'host',
+    mobile: '01012345678',
+    email: 'test@test.com'
+  },
 };
