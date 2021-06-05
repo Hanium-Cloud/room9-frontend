@@ -28,8 +28,6 @@ const MyPage = (props) => {
   return (
     <>
       <AppHeader />
-      <PageHeader title="마이페이지" />
-
       <div style={{padding: '20px', backgroundColor: '#fafafa'}}>
         <UserCard user={MockData.mockGuestUser} showType={true}/>
 
