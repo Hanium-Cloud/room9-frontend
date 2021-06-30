@@ -30,7 +30,6 @@ const MyPage = (props) => {
       <AppHeader />
       <div style={{padding: '20px', backgroundColor: '#fafafa'}}>
         <UserCard user={MockData.mockGuestUser} showType={true}/>
-
       </div>
       <div>
         <ul>

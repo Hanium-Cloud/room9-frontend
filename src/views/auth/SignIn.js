@@ -51,7 +51,13 @@ const SignIn = (props) => {
     });
 
     history.push('/');
-  }
+  };
+
+  const toKakaoLogin = () => {
+    window.location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=64dfaa62a542bcefe16d09bd77b6ca8c&redirect_uri=http://localhost:8080/oauth2/callback/kakao&response_type=code';
+  };
+
+
 
   return (
     <BackGround>
@@ -63,6 +69,7 @@ const SignIn = (props) => {
         밑에는 테스트고 실제로 버튼은 하나일거임.
         <Button block onClick={() => login(UserType.Guest)}>Kakao로 로그인 guest</Button>
         <Button block onClick={() => login(UserType.Host)}>Kakao로 로그인 host</Button>
+        <Button block onClick={() => toKakaoLogin()}>Kakao로 로그인</Button>
       </ButtonContainer>
     </BackGround>
   )
