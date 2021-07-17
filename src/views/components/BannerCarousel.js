@@ -1,4 +1,4 @@
-import {Carousel, Image} from "antd";
+import {Carousel} from "antd";
 import MockData from '../../constant/MockData';
 
 const carouselItemContainer = {
@@ -13,8 +13,8 @@ const BannerCarousel = (props) => {
   return (
     <>
       <Carousel autoplay>
-      {
-        props.mock ?
+        {
+          props.mock ?
             MockData.BannerCarouselMockData.map(item => (
               <div key={item.roomId}>
                 <div style={{...carouselItemContainer, backgroundImage: `url('${item.imageUrl}')`}}>
@@ -22,10 +22,10 @@ const BannerCarousel = (props) => {
                 </div>
               </div>
             ))
-          :
-          <>
-          </>
-      }
+            :
+            <>
+            </>
+        }
       </Carousel>
     </>
   )

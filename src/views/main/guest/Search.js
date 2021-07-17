@@ -1,4 +1,4 @@
-import {Carousel, Col, Input, Row,} from "antd";
+import {Col, Input, Row,} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import Color from "../../../constant/Color";
 import BannerCarousel from "../../components/BannerCarousel";
@@ -12,7 +12,6 @@ const mainTextContainer = {
   marginTop: '10px',
   textAlign: 'center',
 }
-
 
 const Search = (props) => {
   return (

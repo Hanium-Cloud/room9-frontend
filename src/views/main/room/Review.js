@@ -1,6 +1,6 @@
 import {Avatar, Comment} from "antd";
 import Fallback from "../../../constant/Fallback";
-import Score from "./Score";
+import Score from "../../components/Score";
 
 const reviewContainer = {
   padding: '10px 20px',

@@ -2,9 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './thirdparty/iamport/jquery-3.6.0.min.js';
+import './thirdparty/iamport/iamport.payment-1.1.5.js';
 
 import 'antd/dist/antd.css';
 import './index.css';
+
+IMP.init('imp51891266');
 
 ReactDOM.render(
   <React.StrictMode>

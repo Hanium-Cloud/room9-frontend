@@ -7,6 +7,8 @@ import Like from "../views/main/guest/Like";
 import Message from "../views/main/guest/Message";
 import MyPage from "../views/main/guest/MyPage";
 import KakaoCallback from "../views/auth/KakaoCallback";
+import RoomDetail from "../views/main/room/RoomDetail";
+import RoomReserve from "../views/main/room/RoomReserve";
 
 export default function Router() {
   return (
@@ -17,6 +19,8 @@ export default function Router() {
       <PrivateRoute exact path="/like" component={Like} />
       <PrivateRoute exact path="/message" component={Message} />
       <PrivateRoute exact path="/mypage" component={MyPage} />
+      <PrivateRoute exact path="/room/:roomId" component={RoomDetail} />
+      <PrivateRoute exact path="/room/:roomId/reserve" component={RoomReserve} />
       <Redirect to="/signin" />
     </BrowserRouter>
   )

@@ -1,5 +1,3 @@
-import Color from "../../constant/Color";
-
 const ContainerStyle = {
   textAlign: 'center',
   padding: '10px 0 0 0',

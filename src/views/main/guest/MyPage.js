@@ -1,5 +1,4 @@
 import AppHeader from "../../layouts/AppHeader";
-import PageHeader from "../../components/PageHeader";
 import UserCard from "../../components/UserCard";
 import MockData from "../../../constant/MockData";
 import SimpleList from "../../components/SimpleList";

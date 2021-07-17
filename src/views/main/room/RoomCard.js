@@ -1,4 +1,5 @@
 import {EnvironmentOutlined, StarFilled} from "@ant-design/icons";
+import {useHistory} from "react-router-dom";
 
 const Container = {
   padding: '10px 20px',
@@ -27,26 +28,32 @@ const regionStyle = {
 }
 
 const RoomCard = (props) => {
+  const history = useHistory();
+  const goToRoomDetail = (roomId) => {
+    history.push('/room/10'); // TODO
+  }
 
   return (
     <div style={Container}>
-      <div style={{...ImageBoxStyle, backgroundImage: `url('${props?.room.thumbnailUrl}')`}}/>
-      <div style={{float: 'left'}}>
-        <h3 style={RoomTitleStyle}>
-          {props?.room.name}
-          <span>
+      <div onClick={() => goToRoomDetail()}>
+        <div style={{...ImageBoxStyle, backgroundImage: `url('${props?.room.thumbnailUrl}')`}}/>
+        <div style={{float: 'left'}}>
+          <h3 style={RoomTitleStyle}>
+            {props?.room.name}
+            <span>
               <StarFilled style={{color: '#F2C94C', marginLeft: '10px', fontSize: '10px'}} />
               <span style={{fontSize: '10px'}} >{props?.room.score}</span>
               <span style={{fontSize: '10px', color: '#888888'}} > ({props?.room.reviewCount})</span>
           </span>
-        </h3>
-        <span style={regionStyle}>
+          </h3>
+          <span style={regionStyle}>
           <EnvironmentOutlined />
-          {props?.room.region}
+            {props?.room.region}
         </span>
-      </div>
-      <div style={{float: 'right', lineHeight: '56px', verticalAlign: 'center'}}>
-        <p style={{margin: '0', fontSize: '22px', color: '#049FFF'}}>{props?.room?.price?.toLocaleString()} 원 <span style={{color: '#888888'}}>/ 박</span></p>
+        </div>
+        <div style={{float: 'right', lineHeight: '56px', verticalAlign: 'center'}}>
+          <p style={{margin: '0', fontSize: '22px', color: '#049FFF'}}>{props?.room?.price?.toLocaleString()} 원 <span style={{color: '#888888'}}>/ 박</span></p>
+        </div>
       </div>
     </div>
   )
