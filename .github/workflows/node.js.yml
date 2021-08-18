@@ -57,8 +57,7 @@ jobs:
         INFRA_KEY: ${{ secrets.ROOM9_INFRA_KEY }}
       run: |
         eval `ssh-agent -s`
-        ssh-add - <<< "${INFRA_KEY}"; git clone git@github.com:Hanium-Cloud/room9-infra.git .
-        git push origin main
+        ssh-add - <<< "${INFRA_KEY}"; git push origin main
 
 
 #        git push origin main
