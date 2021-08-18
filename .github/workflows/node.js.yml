@@ -49,7 +49,7 @@ jobs:
         IMAGE_NAME=labyu/room9-frontend
         cd frontend
         BEFORE=$(cat room9-frontend.yaml | grep 'image: labyu/room9-frontend:' | sed -e 's/^ *//g' -e 's/ *$//g')
-        sed -i "s@$BEFORE@image: labyu/room9-frontend:$BUILD_NUMBER@g" room9-frontend.yaml
+        sed -i "s@$BEFORE@- image: labyu/room9-frontend:$BUILD_NUMBER@g" room9-frontend.yaml
 
         git config user.name labyu
         git config user.email labyu2020@gmail.com
