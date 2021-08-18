@@ -51,5 +51,12 @@ jobs:
         git config user.email labyu2020@gmail.com
         git add .
         git commit -m "Action Change Deployment Spec To image: labyu/room9-frontend:$BUILD_NUMBER"
+    - name: Push
+      env:
+        BUILD_NUMBER: ${{ github.run_number }}
+        INFRA_KEY: ${{ secrets.ROOM9_INFRA_KEY }}
+      run: |
         git pull origin main
+
+
 #        git push origin main
