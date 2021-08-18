@@ -28,12 +28,14 @@ jobs:
         docker push $IMAGE_NAME
 
     - uses: AutoModality/action-clean@v1
-    - uses: actions/checkout@v2
-      with:
-        repository: git@github.com:Hanium-Cloud/room9-infra.git
-        ref: main
-        token: ''
-        ssh-key: ${{ secrets.ROOM9_INFRA_KEY }}
+    - name: Checkout Infra Repo
+      env:
+        INFRA_KEY: ${{ secrets.ROOM9_INFRA_KEY }}
+      run: |
+        rm * -rf
+        rm -rf .git
+        eval `ssh-agent -s`
+        ssh-add - <<< "${INFRA_KEY}"; git clone git@github.com:Hanium-Cloud/room9-infra.git
     - name: Change Deploy Spec
       env:
         BUILD_NUMBER: ${{ github.run_number }}
