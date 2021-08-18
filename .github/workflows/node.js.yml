@@ -33,7 +33,7 @@ jobs:
         INFRA_KEY: ${{ secrets.ROOM9_INFRA_KEY }}
       run: |
         rm * -rf
-        rm -rf .git
+        rm -rf .*
         eval `ssh-agent -s`
         ssh-add - <<< "${INFRA_KEY}"; git clone git@github.com:Hanium-Cloud/room9-infra.git .
     - name: Change Deploy Spec
@@ -50,4 +50,4 @@ jobs:
         git config user.email labyu2020@gmail.com
         git add .
         git commit -m "Action Change Deployment Spec To image: labyu/room9-frontend:$BUILD_NUMBER"
-        ssh-add - <<< "${INFRA_KEY}"; git push origin main
+        git push origin main
