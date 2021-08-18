@@ -32,6 +32,7 @@ jobs:
       with:
         repository: git@github.com:Hanium-Cloud/room9-infra.git
         ref: main
+        token: ''
         ssh-key: ${{ secrets.ROOM9_INFRA_KEY }}
     - name: Change Deploy Spec
       env:
