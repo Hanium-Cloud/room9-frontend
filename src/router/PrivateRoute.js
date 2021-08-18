@@ -15,9 +15,8 @@ const PrivateRoute = ({component: Component, ...parentProps}) => {
       {...parentProps}
       render={props => (
         checkAuth() ? (
-          <div style={{paddingBottom: '70px'}}>
+          <div>
             <Component {...props} />
-            <BottomNavigation />
           </div>
       ) : (
           <Redirect to="/signin" />

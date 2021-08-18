@@ -41,9 +41,9 @@ const guestItems = [
 ];
 
 const hostItems = [
-  {path: '/myroom', icon: HomeOutlined, name: '내 숙소'},
-  {path: '/reservation/host', icon: CheckCircleOutlined, name: '내 숙소'},
-  {path: '/message', icon: MailOutlined, name: '메시지'},
+  {path: '/host/myroom', icon: HomeOutlined, name: '내 숙소'},
+  {path: '/host/reservation', icon: CheckCircleOutlined, name: '예약 확인'},
+  {path: '/host/message', icon: MailOutlined, name: '메시지'},
   {path: '/mypage', icon: UserOutlined, name: '마이페이지'},
 ];
 

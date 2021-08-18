@@ -1,6 +1,7 @@
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import {Calendar as RangePicker} from "react-modern-calendar-datepicker";
+import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
+import {Calendar} from '@hassanmojab/react-modern-calendar-datepicker';
 import {useState} from "react";
+import './MobileDatePicker.css';
 
 const dateToCalendarSpec = (date) => {
   return {
@@ -26,10 +27,11 @@ const MobileDatePicker = (props) => {
     defaultRange
   );
   console.log(minimumDate);
-  return (<RangePicker
+  return (<Calendar
     value={selectedDayRange}
     onChange={setSelectedDayRange}
     minimumDate={minimumDate}
+    calendarClassName="my-calendar-style"
   />)
 }
 

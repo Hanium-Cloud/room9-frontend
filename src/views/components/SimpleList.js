@@ -1,3 +1,4 @@
+import {useHistory} from "react-router-dom";
 
 const Container = {
   borderBottom: '1px solid #fafafa',
@@ -7,11 +8,13 @@ const Container = {
 
 
 const SimpleList = (props) => {
+  const history = useHistory();
+
   return (
     <>
       {
         props?.items.map(item => (
-          <div style={Container}>
+          <div style={Container} onClick={() => history.push(item?.path)}>
             <div style={{float: 'left'}}>
               {item?.name}
             </div>

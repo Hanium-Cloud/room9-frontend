@@ -4,6 +4,7 @@ import MockData from "../../../constant/MockData";
 import {EnvironmentOutlined, StarFilled} from "@ant-design/icons";
 import MobileDatePicker from "../../components/MobileDatePicker";
 import Color from "../../../constant/Color";
+import TopNavigation from "../../layouts/TopNavigation";
 
 const PadContainer = {
   padding: '10px 20px',
@@ -71,6 +72,7 @@ const RoomReserve = (props) => {
 
   return (
     <>
+      <TopNavigation title="예약하기" />
       <Row>
         <Col span={24}>
           <BannerImage src={MockData.BannerCarouselMockData[0].imageUrl}/>
@@ -97,6 +99,15 @@ const RoomReserve = (props) => {
         </Col>
       </Row>
 
+      <Row>
+        <Col span={24} style={PadContainer}>
+          <h3 style={{marginBottom: '4px'}}>주의 사항</h3>
+          <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut culpa
+            ea earum ipsa omnis pariatur. Ab distinctio ducimus itaque iure molestiae, necessitatibus nihil, nisi
+            repellendus sapiente sequi, temporibus unde.</p>
+        </Col>
+      </Row>
+      
       <Row>
         <Col style={PadContainer} span={24}>
           <h3 style={{textAlign: 'center'}}>예약하기</h3>

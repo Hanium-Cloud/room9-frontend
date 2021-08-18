@@ -1,12 +1,14 @@
 import MockData from "../../../constant/MockData";
-import {Button, Carousel, Col, Row} from "antd";
+import {Button, Carousel, Col, Row, Tabs} from "antd";
 import {useHistory, useParams} from 'react-router-dom';
-import {CheckOutlined, EnvironmentOutlined, StarFilled} from "@ant-design/icons";
+import {AppstoreOutlined, CameraOutlined, CommentOutlined, EnvironmentOutlined, StarFilled} from "@ant-design/icons";
 import TagGroup from "../../components/TagGroup";
+import TopNavigation from "../../layouts/TopNavigation";
+import Review from "./Review";
 
 const carouselContainer = {
   borderRadius: '0 0 25px 25px',
-  boxShadow: '0 0 3px 3px rgba(0, 0, 0, 0.3)',
+  boxShadow: '0 4px 3px -3px rgba(0, 0, 0, 0.3)',
   overflow: 'hidden',
 }
 
@@ -37,15 +39,6 @@ const regionStyle = {
   color: '#888888'
 }
 
-const reserveIcon = {
-  position: 'fixed',
-  bottom: '90px',
-  right: '30px',
-  boxShadow: '0 0 3px 2px rgba(0, 0, 0, 0.2)',
-  width: '50px',
-  height: '50px',
-}
-
 
 const RoomDetail = (props) => {
   let {roomId} = useParams();
@@ -56,7 +49,8 @@ const RoomDetail = (props) => {
   }
 
   return (
-    <>
+    <div style={{paddingBottom: '15px'}}>
+      <TopNavigation title="방이름"/>
       <Carousel autoplay style={carouselContainer}>
         {
           props.mock | true ?
@@ -96,31 +90,83 @@ const RoomDetail = (props) => {
         </Col>
       </Row>
 
-      <Row>
-        <Col span={24} style={PadContainer}>
-          <h5>이지은님이 호스팅하는 펜션</h5>
-          <TagGroup tags={['WIFI', '수영장', '온천', '테라스']}/>
-        </Col>
-      </Row>
+      <Tabs defaultActiveKey="1">
+        <Tabs.TabPane tab={<span><AppstoreOutlined style={{marginRight: '0'}}/> 상세 정보</span>} key="1">
+          <Row>
+            <Col span={24} style={PadContainer}>
+              <h5>이지은님이 호스팅하는 펜션</h5>
+              <TagGroup tags={['WIFI', '수영장', '온천', '테라스', '반려견 가능']}/>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={24} style={PadContainer}>
+              <h3 style={{marginBottom: '4px'}}>설명</h3>
+              <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi eius enim
+                inventore iste magnam officiis! Deserunt dolore ea eveniet maxime quae, quam totam voluptates! Atque
+                culpa
+                molestias numquam quos repellat!</p>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={24} style={PadContainer}>
+              <h3 style={{marginBottom: '4px'}}>방 유형</h3>
+              <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut
+                culpa
+                ea earum ipsa omnis pariatur. Ab distinctio ducimus itaque iure molestiae, necessitatibus nihil, nisi
+                repellendus sapiente sequi, temporibus unde.</p>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={24} style={PadContainer}>
+              <h3 style={{marginBottom: '4px'}}>주의 사항</h3>
+              <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut
+                culpa
+                ea earum ipsa omnis pariatur. Ab distinctio ducimus itaque iure molestiae, necessitatibus nihil, nisi
+                repellendus sapiente sequi, temporibus unde.</p>
+            </Col>
+          </Row>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab={<span><CameraOutlined style={{marginRight: '5px'}}/>사진</span>} key="2">
+          <Row style={{paddingBottom: '40px'}}>
+            {MockData.BannerCarouselMockData.map((item, idx) => (
+              <Col span={8} key={idx}>
+                <div style={{
+                  backgroundImage: `url('${item.imageUrl}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center center',
+                  height: '120px',
+                }}/>
+              </Col>
+            ))}
+          </Row>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab={<span><CommentOutlined style={{marginRight: '5px'}}/>리뷰</span>} key="3">
+          <Row>
+            <Col span={24}>
+              {MockData.ReviewDataMock.map((item) => (
+                <Review key={item.reviewId} review={item}/>
+              ))}
+            </Col>
+          </Row>
+        </Tabs.TabPane>
+      </Tabs>
 
       <Row>
-        <Col span={24} style={PadContainer}>
-          <h3 style={{marginBottom: '4px'}}>설명</h3>
-          <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi eius enim
-            inventore iste magnam officiis! Deserunt dolore ea eveniet maxime quae, quam totam voluptates! Atque culpa
-            molestias numquam quos repellat!</p>
+        <Col style={PadContainer} span={24}>
+          <Button onClick={() => goReserve()}
+                  style={{
+                    borderRadius: '50px',
+                    height: '40px',
+                    boxShadow: '0 0 3px 3px rgba(0, 0, 0, 0.1)',
+                    fontSize: '17px'
+                  }}
+                  type="primary" block>예약하기</Button>
         </Col>
       </Row>
-
-      <Row>
-        <Col span={24} style={PadContainer}>
-          <h3 style={{marginBottom: '4px'}}>방 유형</h3>
-          <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut culpa ea earum ipsa omnis pariatur. Ab distinctio ducimus itaque iure molestiae, necessitatibus nihil, nisi repellendus sapiente sequi, temporibus unde.</p>
-        </Col>
-      </Row>
-
-      <Button onClick={() => goReserve()} style={reserveIcon} type="primary" shape="circle">예약하기</Button>
-    </>
+    </div>
   );
 }
 

@@ -7,6 +7,7 @@ import Review from "../room/Review";
 import BannerText from "../../components/BannerText";
 import RoomCard from "../room/RoomCard";
 import AppHeader from "../../layouts/AppHeader";
+import BottomNavigation from "../../layouts/BottomNavigation";
 
 const mainTextContainer = {
   marginTop: '10px',
@@ -15,7 +16,7 @@ const mainTextContainer = {
 
 const Search = (props) => {
   return (
-    <>
+    <div style={{paddingBottom: '70px'}}>
       <AppHeader />
       <Row>
         <Col span={24} style={{padding: '15px', backgroundColor: Color.Primary} }>
@@ -55,7 +56,8 @@ const Search = (props) => {
           </div>
         </Col>
       </Row>
-    </>
+      <BottomNavigation />
+    </div>
   );
 }
 
