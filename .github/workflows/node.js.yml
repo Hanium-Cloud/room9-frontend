@@ -31,6 +31,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         repository: git@github.com:Hanium-Cloud/room9-infra.git
+        ref: main
         ssh-key: ${{ secrets.ROOM9_INFRA_KEY }}
     - name: Change Deploy Spec
       env:
