@@ -19,5 +19,5 @@ jobs:
         DCOKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DCOKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+        docker login registry-1.docker.io -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
 
