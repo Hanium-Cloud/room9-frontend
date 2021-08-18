@@ -1,0 +1,10 @@
+version: "3.1"
+
+services:
+  front-end:
+    container_name: room9-front-end
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    ports:
+    - 3000:3000
