@@ -26,3 +26,23 @@ jobs:
         IMAGE_NAME=labyu/room9-frontend:$BUILD_NUMBER
         docker build -t $IMAGE_NAME ./
         docker push $IMAGE_NAME
+
+    - uses: AutoModality/action-clean@v1
+    - uses: actions/checkout@v2
+      with:
+        repository: git@github.com:Hanium-Cloud/room9-infra.git
+        ssh-key: ${{ secrets.ROOM9_INFRA_KEY }}
+    - name: Change Deploy Spec
+      env:
+        BUILD_NUMBER: ${{ github.run_number }}
+      run: |
+        IMAGE_NAME=labyu/room9-frontend
+        cd frontend
+        BEFORE=$(cat room9-frontend.yaml | grep 'image: labyu/room9-frontend:' | sed -e 's/^ *//g' -e 's/ *$//g')
+        sed -i "s@$BEFORE@image: labyu/room9-frontend:$BUILD_NUMBER@g" room9-frontend.yaml
+
+        git config user.name labyu
+        git config user.email labyu2020@gmail.com
+        git add .
+        git commit -m "Action Change Deployment Spec To image: labyu/room9-frontend:$BUILD_NUMBER"
+        git push origin main
