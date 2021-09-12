@@ -30,7 +30,7 @@ const Search = (props) => {
       const rooms = response.data.room;
       const results = rooms.map(room => ({
         'roomId' : room.roomId,
-        'imageUrl' : room.images[0].url,
+        'imageUrl' : room?.images[0]?.url,
         'description' : room.title
       }));
 
@@ -42,7 +42,7 @@ const Search = (props) => {
       const rooms = response.data.room;
       const results = rooms.map(room => ({
         'id': room.roomId,
-        'thumbnailUrl': room.images[0].url,
+        'thumbnailUrl': room?.images[0]?.url,
         'name': room.title,
         'region': room.location,
         'price': room.price,

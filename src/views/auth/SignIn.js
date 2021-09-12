@@ -70,7 +70,9 @@ const SignIn = (props) => {
         <LogoSubscription>room9에서 마음에 드는 숙소를 찾아보세요</LogoSubscription>
       </LogoContainer>
       <ButtonContainer>
-        <Button block onClick={() => toKakaoLogin()}>Kakao로 로그인</Button>
+        <div onClick={() => toKakaoLogin()} style={{textAlign: 'center'}}>
+          <img src="/images/kakao_login_medium_narrow.png" alt=""/>
+        </div>
       </ButtonContainer>
     </BackGround>
   )
