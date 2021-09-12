@@ -17,7 +17,12 @@ const TopNavigation = (props) => {
     <Container>
       <Row>
         <Col span={4}>
-          <ArrowLeftOutlined onClick={() => history.goBack()} />
+          <ArrowLeftOutlined onClick={() => {
+            props.returnUrl ?
+              history.push(props.returnUrl)
+              :
+              history.goBack();
+          }} />
         </Col>
         <Col span={16} style={{textAlign: 'center'}}>
           { props.title ? props.title : '' }
