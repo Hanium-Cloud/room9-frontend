@@ -5,6 +5,7 @@ import PrivateRoute from "./PrivateRoute";
 import Search from "../views/main/guest/Search";
 import Like from "../views/main/guest/Like";
 import Message from "../views/main/guest/Message";
+import HostMessage from "../views/main/host/Message";
 import MyPage from "../views/main/guest/MyPage";
 import {MyPageChangeRole, MyPageLogout} from "../views/main/guest/MyPage";
 import KakaoCallback, {ACCESS_TOKEN_LOCAL_STORAGE, login} from "../views/auth/KakaoCallback";
@@ -50,6 +51,7 @@ export default function Router() {
       {/* Host */}
       <PrivateRoute exact path="/host/myroom" component={MyRoom} />
       <PrivateRoute exact path="/host/reservation" component={HostReservation} />
+      <PrivateRoute exact path="/host/message" component={HostMessage} />
 
       {/* Common */}
     </BrowserRouter>

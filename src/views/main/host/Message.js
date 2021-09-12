@@ -1,14 +1,18 @@
 import BottomNavigation from "../../layouts/BottomNavigation";
 import AppHeader from "../../layouts/AppHeader";
 
-const HostReservation = (props) => {
+
+const HostMessage = (props) => {
+
   return (
     <div>
       <AppHeader />
-      Host Reservation
+      <div>
+        Hello this is Host Message
+      </div>
       <BottomNavigation />
     </div>
   )
-};
+}
 
-export default HostReservation;
+export default HostMessage;
