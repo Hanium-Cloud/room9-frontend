@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './thirdparty/iamport/jquery-3.6.0.min.js';
 import './thirdparty/iamport/iamport.payment-1.1.5.js';
+import registerServiceWorker from 'react-service-worker';
 
 import 'antd/dist/antd.css';
 import './index.css';

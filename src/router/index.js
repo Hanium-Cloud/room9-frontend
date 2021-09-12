@@ -15,6 +15,7 @@ import {useEffect} from "react";
 import MyRoom from "../views/main/host/MyRoom";
 import HostReservation from "../views/main/host/HostReservation";
 import GuestReservation from "../views/main/reservation/GuestReservation";
+import MyRoomCreate from "../views/main/host/MyRoomCreate";
 
 const ScrollToTop = (props) => {
   const { pathname } = useLocation();
@@ -50,6 +51,7 @@ export default function Router() {
 
       {/* Host */}
       <PrivateRoute exact path="/host/myroom" component={MyRoom} />
+      <PrivateRoute exact path="/host/myroom/create" component={MyRoomCreate} />
       <PrivateRoute exact path="/host/reservation" component={HostReservation} />
       <PrivateRoute exact path="/host/message" component={HostMessage} />
 

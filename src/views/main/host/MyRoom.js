@@ -6,19 +6,22 @@ import Color from "../../../constant/Color";
 import MockData from "../../../constant/MockData";
 import RoomCard from "../room/RoomCard";
 import styled from "styled-components";
+import {useHistory} from "react-router-dom";
 
 const ButtonContainer = styled.div`
   padding: 20px 40px;
 `;
 
 const MyRoom = (props) => {
+  const history = useHistory();
+
   return (
     <div>
       <AppHeader />
       <Row>
         <Col span={24} style={{padding: '15px'}}>
           <ButtonContainer>
-            <Button block style={{backgroundColor: Color.Primary, color: Color.White}}>새로운 방 등록하기!</Button>
+            <Button onClick={() => {history.push("/host/myroom/create")}} block style={{backgroundColor: Color.Primary, color: Color.White}}>새로운 방 등록하기!</Button>
           </ButtonContainer>
           <div>
             {
