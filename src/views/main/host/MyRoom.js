@@ -1,6 +1,12 @@
+import BottomNavigation from "../../layouts/BottomNavigation";
 
 const MyRoom = (props) => {
-  return (<div>MyRoom</div>)
+  return (
+    <div>
+      MyRoom
+      <BottomNavigation />
+    </div>
+  )
 };
 
 export default MyRoom;

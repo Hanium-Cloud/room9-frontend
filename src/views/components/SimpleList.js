@@ -13,8 +13,8 @@ const SimpleList = (props) => {
   return (
     <>
       {
-        props?.items.map(item => (
-          <div style={Container} onClick={() => history.push(item?.path)}>
+        props?.items.map((item, idx) => (
+          <div key={idx} style={Container} onClick={() => history.push(item?.path)}>
             <div style={{float: 'left'}}>
               {item?.name}
             </div>

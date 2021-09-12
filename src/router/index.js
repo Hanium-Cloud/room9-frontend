@@ -6,7 +6,7 @@ import Search from "../views/main/guest/Search";
 import Like from "../views/main/guest/Like";
 import Message from "../views/main/guest/Message";
 import MyPage from "../views/main/guest/MyPage";
-import {MyPageChangeRole} from "../views/main/guest/MyPage";
+import {MyPageChangeRole, MyPageLogout} from "../views/main/guest/MyPage";
 import KakaoCallback, {ACCESS_TOKEN_LOCAL_STORAGE, login} from "../views/auth/KakaoCallback";
 import RoomDetail from "../views/main/room/RoomDetail";
 import RoomReserve from "../views/main/room/RoomReserve";
@@ -44,6 +44,7 @@ export default function Router() {
 
       <PrivateRoute exact path="/mypage" component={MyPage} />
       <PrivateRoute exact path="/mypage/changerole" component={MyPageChangeRole} />
+      <PrivateRoute exact path="/mypage/logout" component={MyPageLogout} />
       <PrivateRoute exact path="/mypage/reservation" component={GuestReservation} />
 
       {/* Host */}
