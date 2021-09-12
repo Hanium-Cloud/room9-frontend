@@ -8,6 +8,8 @@ import BannerText from "../../components/BannerText";
 import RoomCard from "../room/RoomCard";
 import AppHeader from "../../layouts/AppHeader";
 import BottomNavigation from "../../layouts/BottomNavigation";
+import {useRecoilValue} from "recoil";
+import {userState} from "../../../store/state";
 
 const mainTextContainer = {
   marginTop: '10px',
@@ -15,6 +17,9 @@ const mainTextContainer = {
 }
 
 const Search = (props) => {
+  const user = useRecoilValue(userState);
+  console.log(user);
+
   return (
     <div style={{paddingBottom: '70px'}}>
       <AppHeader />

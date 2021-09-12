@@ -5,6 +5,7 @@ import {useSetRecoilState} from "recoil";
 import {userState} from "../../store/state";
 import {useHistory} from 'react-router-dom';
 import {UserType} from "../../constant/User";
+import {getUrlParams, login} from "./KakaoCallback";
 
 const BackGround = styled.div`
   background-color: #049FFF;
@@ -40,24 +41,27 @@ const ButtonContainer = styled.div`
 const SignIn = (props) => {
   const setUser = useSetRecoilState(userState);
   const history = useHistory();
+  const params = getUrlParams();
 
-  const login = async (type) => {
-    // TODO 로그인 API 연동, 현재는 스터빙 해놓음
-    await setUser({
-      isLogin: true,
-      name: 'testUser',
-      email: 'testEmail@test.com',
-      type: type
-    });
+  console.log(params);
+  if (params.returnUrl) {
+    login(null, history, setUser, params.returnUrl);
+  } else {
+    login(null, history, setUser);
+  }
 
-    history.push('/');
-  };
 
   const toKakaoLogin = () => {
-    window.location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=64dfaa62a542bcefe16d09bd77b6ca8c&redirect_uri=http://localhost:8080/oauth2/callback/kakao&response_type=code';
+    let url = window.location.href;
+    let redirectUri = url.slice(0, url.indexOf('/', 9));
+
+    let kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?`;
+    kakaoLoginUrl += `client_id=64dfaa62a542bcefe16d09bd77b6ca8c`;
+    kakaoLoginUrl += `&redirect_uri=https://api.room9.shop/oauth2/callback/kakao`;
+    kakaoLoginUrl += `&response_type=code`;
+    kakaoLoginUrl += `&state={"redirectUri":"${redirectUri}/signin/callback/kakao"}`
+    window.location.href = kakaoLoginUrl;
   };
-
-
 
   return (
     <BackGround>
@@ -66,9 +70,6 @@ const SignIn = (props) => {
         <LogoSubscription>room9에서 마음에 드는 숙소를 찾아보세요</LogoSubscription>
       </LogoContainer>
       <ButtonContainer>
-        밑에는 테스트고 실제로 버튼은 하나일거임.
-        <Button block onClick={() => login(UserType.Guest)}>Kakao로 로그인 guest</Button>
-        <Button block onClick={() => login(UserType.Host)}>Kakao로 로그인 host</Button>
         <Button block onClick={() => toKakaoLogin()}>Kakao로 로그인</Button>
       </ButtonContainer>
     </BackGround>

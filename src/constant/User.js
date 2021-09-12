@@ -1,4 +1,4 @@
 export const UserType = {
-  Host: 'host',
-  Guest: 'guest',
+  Host: 'HOST',
+  Guest: 'GUEST',
 }

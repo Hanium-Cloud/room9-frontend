@@ -1,4 +1,4 @@
-import {BrowserRouter, Redirect, Route, useLocation} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, useHistory, useLocation} from "react-router-dom";
 
 import SignIn from "../views/auth/SignIn";
 import PrivateRoute from "./PrivateRoute";
@@ -6,7 +6,8 @@ import Search from "../views/main/guest/Search";
 import Like from "../views/main/guest/Like";
 import Message from "../views/main/guest/Message";
 import MyPage from "../views/main/guest/MyPage";
-import KakaoCallback from "../views/auth/KakaoCallback";
+import {MyPageChangeRole} from "../views/main/guest/MyPage";
+import KakaoCallback, {ACCESS_TOKEN_LOCAL_STORAGE, login} from "../views/auth/KakaoCallback";
 import RoomDetail from "../views/main/room/RoomDetail";
 import RoomReserve from "../views/main/room/RoomReserve";
 import {useEffect} from "react";
@@ -32,7 +33,7 @@ export default function Router() {
 
       {/* Common */}
       <Route exact path="/signin" component={SignIn} />
-      <Route exact path="/auth/callback/kakao" component={KakaoCallback} />
+      <Route exact path="/signin/callback/kakao" component={KakaoCallback} />
 
       {/* Guest */}
       <PrivateRoute exact path="/" component={Search} />
@@ -42,6 +43,7 @@ export default function Router() {
       <PrivateRoute exact path="/room/:roomId/reserve" component={RoomReserve} />
 
       <PrivateRoute exact path="/mypage" component={MyPage} />
+      <PrivateRoute exact path="/mypage/changerole" component={MyPageChangeRole} />
       <PrivateRoute exact path="/mypage/reservation" component={GuestReservation} />
 
       {/* Host */}
@@ -49,7 +51,6 @@ export default function Router() {
       <PrivateRoute exact path="/host/reservation" component={HostReservation} />
 
       {/* Common */}
-      <Redirect to="/signin" />
     </BrowserRouter>
   )
 }
