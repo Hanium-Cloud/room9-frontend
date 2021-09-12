@@ -30,12 +30,12 @@ const regionStyle = {
 const RoomCard = (props) => {
   const history = useHistory();
   const goToRoomDetail = (roomId) => {
-    history.push('/room/10'); // TODO
+    history.push(`/room/${roomId}`); // TODO
   }
 
   return (
     <div style={Container}>
-      <div onClick={() => goToRoomDetail()}>
+      <div onClick={() => goToRoomDetail(props?.room.id)}>
         <div style={{...ImageBoxStyle, backgroundImage: `url('${props?.room.thumbnailUrl}')`}}/>
         <div style={{float: 'left'}}>
           <h3 style={RoomTitleStyle}>

@@ -38,3 +38,15 @@ export const createRoom = async (userId,
     }
   })
 }
+
+export const getPopularRooms = async () => {
+  return await Axios.get('/room/popular');
+}
+
+export const getRandomRooms = async () => {
+  return await Axios.get('/room/random');
+}
+
+export const getRoomDetail = async (roomId) => {
+  return await Axios.get(`/room/${roomId}`);
+}

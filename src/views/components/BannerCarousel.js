@@ -23,8 +23,13 @@ const BannerCarousel = (props) => {
               </div>
             ))
             :
-            <>
-            </>
+            props.items.map((item) => (
+              <div key={item.roomId}>
+                <div style={{...carouselItemContainer, backgroundImage: `url('${item.imageUrl}')`}}>
+                  <span style={{color: 'white', fontSize: '20px'}}>{item.description}</span>
+                </div>
+              </div>
+            ))
         }
       </Carousel>
     </>

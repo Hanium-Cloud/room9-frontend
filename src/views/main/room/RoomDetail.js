@@ -5,6 +5,9 @@ import {AppstoreOutlined, CameraOutlined, CommentOutlined, EnvironmentOutlined, 
 import TagGroup from "../../components/TagGroup";
 import TopNavigation from "../../layouts/TopNavigation";
 import Review from "./Review";
+import {useEffect, useState} from "react";
+import {getRoomDetail} from "../../../api/room";
+import RoomConf from "./RoomConf";
 
 const carouselContainer = {
   borderRadius: '0 0 25px 25px',
@@ -43,6 +46,33 @@ const regionStyle = {
 const RoomDetail = (props) => {
   let {roomId} = useParams();
   const history = useHistory();
+  const [room, setRoom] = useState({
+    "roomId" : 1,
+    "username" : "로딩중",
+    "title" : "로딩중",
+    "location" : "로딩중",
+    "limitPeople" : 0,
+    "price" : 10000,
+    "like" : 0,
+    "images" : [ {
+      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호pngFIle.png"
+    }, {
+      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호jpgFIle.jpg"
+    } ],
+    "content" : "로딩중",
+    "rule" : "로딩중",
+    "charge" : 0,
+    "room_configuration" : [],
+    "room_amenity" : []
+  });
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    getRoomDetail(roomId).then((result) => {
+      let room = result.data;
+      setRoom(room);
+    });
+  }, []);
 
   const goReserve = () => {
     history.push('/room/10/reserve')
@@ -54,9 +84,9 @@ const RoomDetail = (props) => {
       <Carousel autoplay style={carouselContainer}>
         {
           props.mock | true ?
-            MockData.BannerCarouselMockData.map(item => (
-              <div key={item.roomId}>
-                <div style={{...carouselItemContainer, backgroundImage: `url('${item.imageUrl}')`}}>
+            room.images.map((item, idx) => (
+              <div key={idx}>
+                <div style={{...carouselItemContainer, backgroundImage: `url('${item.url}')`}}>
                   <span style={{color: 'white', fontSize: '20px'}}>{item.description}</span>
                 </div>
               </div>
@@ -71,7 +101,7 @@ const RoomDetail = (props) => {
         <Col span={24} style={PadContainer}>
           <div style={{float: 'left'}}>
             <h3 style={RoomTitleStyle}>
-              방 이름
+              {room.title}
               <span>
               <StarFilled style={{color: '#F2C94C', marginLeft: '10px', fontSize: '10px'}}/>
               <span style={{fontSize: '10px'}}>4.5</span>
@@ -80,7 +110,7 @@ const RoomDetail = (props) => {
             </h3>
             <span style={regionStyle}>
           <EnvironmentOutlined/>
-            서울
+              {room.location}
         </span>
           </div>
           <div style={{float: 'right', lineHeight: '56px', verticalAlign: 'center'}}>
@@ -95,46 +125,43 @@ const RoomDetail = (props) => {
           <Row>
             <Col span={24} style={PadContainer}>
               <h5>이지은님이 호스팅하는 펜션</h5>
-              <TagGroup tags={['WIFI', '수영장', '온천', '테라스', '반려견 가능']}/>
+              <TagGroup tags={room.room_amenity.map(item => item.facility)}/>
             </Col>
           </Row>
 
           <Row>
             <Col span={24} style={PadContainer}>
               <h3 style={{marginBottom: '4px'}}>설명</h3>
-              <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi eius enim
-                inventore iste magnam officiis! Deserunt dolore ea eveniet maxime quae, quam totam voluptates! Atque
-                culpa
-                molestias numquam quos repellat!</p>
+              <p style={{color: '#8F92A1'}}>{room.content}</p>
             </Col>
           </Row>
 
           <Row>
             <Col span={24} style={PadContainer}>
               <h3 style={{marginBottom: '4px'}}>방 유형</h3>
-              <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut
-                culpa
-                ea earum ipsa omnis pariatur. Ab distinctio ducimus itaque iure molestiae, necessitatibus nihil, nisi
-                repellendus sapiente sequi, temporibus unde.</p>
+              <p style={{color: '#8F92A1'}}>
+                {
+                  room.room_configuration.map((conf, idx) => (
+                    <RoomConf key={idx} confType={conf.confType} count={conf.count} />
+                  ))
+                }
+              </p>
             </Col>
           </Row>
 
           <Row>
             <Col span={24} style={PadContainer}>
               <h3 style={{marginBottom: '4px'}}>주의 사항</h3>
-              <p style={{color: '#8F92A1'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut
-                culpa
-                ea earum ipsa omnis pariatur. Ab distinctio ducimus itaque iure molestiae, necessitatibus nihil, nisi
-                repellendus sapiente sequi, temporibus unde.</p>
+              <p style={{color: '#8F92A1'}}>{room.rule}</p>
             </Col>
           </Row>
         </Tabs.TabPane>
         <Tabs.TabPane tab={<span><CameraOutlined style={{marginRight: '5px'}}/>사진</span>} key="2">
           <Row style={{paddingBottom: '40px'}}>
-            {MockData.BannerCarouselMockData.map((item, idx) => (
+            {room.images.map((item, idx) => (
               <Col span={8} key={idx}>
                 <div style={{
-                  backgroundImage: `url('${item.imageUrl}')`,
+                  backgroundImage: `url('${item.url}')`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center center',
                   height: '120px',

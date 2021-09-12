@@ -2,7 +2,7 @@ import {Col, Input, Row,} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import Color from "../../../constant/Color";
 import BannerCarousel from "../../components/BannerCarousel";
-import MockData from "../../../constant/MockData";
+import MockData, {houseImage1} from "../../../constant/MockData";
 import Review from "../room/Review";
 import BannerText from "../../components/BannerText";
 import RoomCard from "../room/RoomCard";
@@ -10,6 +10,8 @@ import AppHeader from "../../layouts/AppHeader";
 import BottomNavigation from "../../layouts/BottomNavigation";
 import {useRecoilValue} from "recoil";
 import {userState} from "../../../store/state";
+import {getPopularRooms, getRandomRooms} from "../../../api/room";
+import {useEffect, useState} from "react";
 
 const mainTextContainer = {
   marginTop: '10px',
@@ -18,7 +20,38 @@ const mainTextContainer = {
 
 const Search = (props) => {
   const user = useRecoilValue(userState);
-  console.log(user);
+  const [popularRooms, setPopularRooms] = useState([]);
+  const [randomRooms, setRandomRooms] = useState([]);
+
+  useEffect(() => {
+    getRandomRooms().then((response) => {
+      setRandomRooms([]);
+
+      const rooms = response.data.room;
+      const results = rooms.map(room => ({
+        'roomId' : room.roomId,
+        'imageUrl' : room.images[0].url,
+        'description' : room.title
+      }));
+
+      setRandomRooms(results);
+    })
+
+    getPopularRooms().then((response) => {
+      setPopularRooms([]);
+      const rooms = response.data.room;
+      const results = rooms.map(room => ({
+        'id': room.roomId,
+        'thumbnailUrl': room.images[0].url,
+        'name': room.title,
+        'region': room.location,
+        'price': room.price,
+        'score': 3.58,
+        'reviewCount': room.like,
+      }));
+      setPopularRooms(results);
+    })
+  }, [])
 
   return (
     <div style={{paddingBottom: '70px'}}>
@@ -32,7 +65,7 @@ const Search = (props) => {
         <Col span={24} style={{backgroundColor: Color.White}}>
 
           {/*캐러셀 => 숙소 랜덤으로 뿌려주기*/}
-          <BannerCarousel mock={true} />
+          <BannerCarousel mock={false} items={randomRooms} />
 
           {/*이미지 카드 => 최근 리뷰 보여주기*/}
           <BannerText
@@ -54,7 +87,7 @@ const Search = (props) => {
           />
           <div style={{marginTop: '15px'}}>
             {
-              MockData.RoomCardMock.map((item) => (
+              popularRooms.map((item) => (
                 <RoomCard key={item.id} room={item} />
               ))
             }
