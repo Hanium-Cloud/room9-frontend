@@ -29,8 +29,8 @@ export const createRoom = async (userId,
   });
   conf.forEach((c, idx) => {
     const spt = c.split(' ');
-    formData.append(`conf[${idx}][confType]`, spt[0]);
-    formData.append(`conf[${idx}][count]`, spt[1]);
+    formData.append(`conf[${idx}].confType`, spt[0]);
+    formData.append(`conf[${idx}].count`, spt[1]);
   })
   return await Axios.post('/room/create', formData, {
     headers: {

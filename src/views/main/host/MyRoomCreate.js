@@ -54,7 +54,7 @@ const MyRoomCreate = (props) => {
   const user = useRecoilValue(userState);
   const history = useHistory();
   const tryCreateRoom = async () => {
-    let result = await createRoom(
+    await createRoom(
       user.id,
       title,
       description,
@@ -66,9 +66,10 @@ const MyRoomCreate = (props) => {
       facilities,
       confs,
       images,
-    ).data;
-    console.log(result);
-    // history.push(`/room/${result.roomId}`)
+    ).then((result) => {
+      console.log(result);
+      history.push(`/room/${result.roomId}`)
+    });
   }
 
   return (
