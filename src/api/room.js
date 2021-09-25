@@ -50,3 +50,7 @@ export const getRandomRooms = async () => {
 export const getRoomDetail = async (roomId) => {
   return await Axios.get(`/room/${roomId}`);
 }
+
+export const getAllRooms = async () => {
+  return await Axios.get('/room');
+}
