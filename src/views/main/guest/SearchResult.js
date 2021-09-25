@@ -1,4 +1,4 @@
-import {Col, Input, Row,} from "antd";
+import {Col, Input, Row, Slider, InputNumber, Button} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import Color from "../../../constant/Color";
 import React, {useState, useEffect} from "react";
@@ -7,11 +7,89 @@ import AppHeader from "../../layouts/AppHeader";
 import BottomNavigation from "../../layouts/BottomNavigation";
 import RoomCard from "../../main/room/RoomCard"
 import MockData from "../../../constant/MockData";
+import styled from 'styled-components';
+import getSearchResult from "../../../api/search";
+import getAllRooms from "../../../api/room";
+
+const SearchBoxBlock = styled.div `
+    padding: '10px 20px';
+    overflow: 'hidden';
+    display: grid;
+    grid-template:
+        "InputBlock InputBlock" 50%
+        "Slider InputNumber" 50%
+        "Button Button"
+        /1fr 1fr;
+`;
+
+const InputBox = styled.div `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const SliderBox = styled.div `
+    display: grid;
+    grid-template:
+        "p" 25%
+        "Slider" 75%
+        /1fr;
+`;
 
 const SearchResult = (props) => {
     const [searchRooms, setSearchRooms] = useState([]);
+    const [filter, setFilter] = useState({
+        title: '',
+        limitPrice: 0,
+        detailLocation: '',
+        limitPeople: 0,
+        orderStandard: null
+    });
+    const [visible, setVisible] = useState(true);
+
+    const onInputClick = e => {
+        setVisible(!visible);
+    };
+
+    const onTitleInputChange = e => {
+        setFilter({...filter,
+            title: e.target.value
+        });
+    };
+
+    const onLocationInputChange = e => {
+        setFilter({...filter,
+            detailLocation: e.target.value
+        });
+    };
+
+    const onSliderChange = value => {
+        setFilter({...filter,
+            limitPrice: value
+        });
+    };
+
+    const onInputNumberChange = value => {
+        setFilter({...filter,
+            limitPeople: value
+        });
+    };
+
+    const onButtonClick = e => {
+        //getSearchResult
+        setVisible(false);
+        console.log(filter);
+        setFilter({...filter,
+            title: '',
+            limitPrice: 0,
+            detailLocation: '',
+            limitPeople: 0,
+            orderStandard: null
+        });
+    };
 
     useEffect(() => {
+        //getAllRooms
         setSearchRooms(MockData.RoomCardMock);
     }, []);
 
@@ -20,10 +98,28 @@ const SearchResult = (props) => {
         <AppHeader />
         <Row>
             <Col span={24} style={{padding: '15px', backgroundColor: Color.Primary} }>
-                <Input size="large" style={{borderRadius: '25px'}} prefix={<SearchOutlined style={{color: '#888888'}}/>} placeholder="마음에 드는 숙소를 찾아보세요!" />
+                <Input size="large" style={{borderRadius: '25px'}} prefix={<SearchOutlined style={{color: '#888888'}}/>} placeholder="마음에 드는 숙소를 찾아보세요!" onClick={onInputClick} readOnly/>
             </Col>
         </Row>
-        <PageHeader title="검색 결과" />
+        {visible ? (
+            <SearchBoxBlock>
+                <InputBox>
+                    <Input style={{width: '75%', borderColor: Color.Primary}} placeholder="방 이름으로 검색" onChange={onTitleInputChange}/>
+                </InputBox>
+                <InputBox>
+                    <Input style={{width: '75%', borderColor: Color.Primary}} placeholder="지역 이름으로 검색" onChange={onLocationInputChange}/>
+                </InputBox>
+                <SliderBox>
+                    <div style={{marginLeft: '35%', color: "gray"}}>가격 설정</div>
+                    <Slider style={{width: '75%', borderColor: Color.Primary, marginLeft: '10%'}} min={1} max={30} onChange={onSliderChange}/>
+                </SliderBox>
+                <InputBox>
+                    <InputNumber bordered="true" style={{width: "75%", borderColor: Color.Primary}} placeholder="예약 인원 수 선택" min={1} max={10} onChange={onInputNumberChange}/>
+                </InputBox>
+                <Button size="medium" icon="검색" style={{width: "200%", border: "none", backgroundColor: Color.Primary, color: "white"}} onClick={onButtonClick}/>
+            </SearchBoxBlock>
+        ) : null}
+        <PageHeader title="검색 결과"/>
         <div>
             {
               searchRooms.map((room) => (
