@@ -125,29 +125,33 @@ const SearchResult = (props) => {
         {visible ? (
             <SearchBoxBlock>
                 <InputBox>
-                    <Input style={{width: '75%', borderColor: Color.Primary}} placeholder="방 이름으로 검색" onChange={onTitleInputChange}/>
+                    <Input style={{width: '75%', borderColor: Color.Primary, borderRadius: '25px'}} placeholder="방 이름으로 검색" onChange={onTitleInputChange}/>
                 </InputBox>
                 <InputBox>
-                    <Input style={{width: '75%', borderColor: Color.Primary}} placeholder="지역 이름으로 검색" onChange={onLocationInputChange}/>
+                    <Input style={{width: '75%', borderColor: Color.Primary, borderRadius: '25px'}} placeholder="지역 이름으로 검색" onChange={onLocationInputChange}/>
                 </InputBox>
                 <SliderBox>
                     <div style={{marginLeft: '35%', color: "gray"}}>가격 설정</div>
                     <Slider style={{width: '75%', borderColor: Color.Primary, marginLeft: '10%'}} min={1} max={30} onChange={onSliderChange}/>
                 </SliderBox>
                 <InputBox>
-                    <InputNumber bordered="true" style={{width: "75%", borderColor: Color.Primary}} placeholder="예약 인원 수 선택" min={1} max={10} onChange={onInputNumberChange}/>
+                    <InputNumber style={{width: "75%", borderColor: Color.Primary, borderRadius: '25px'}} placeholder="예약 인원 수 선택" min={1} max={10} onChange={onInputNumberChange}/>
                 </InputBox>
                 <Button size="medium" icon="검색" style={{width: "200%", border: "none", backgroundColor: Color.Primary, color: "white"}} onClick={onButtonClick}/>
             </SearchBoxBlock>
         ) : null}
-        <PageHeader title="검색 결과"/>
-        <div>
-            {
-              searchRooms.map((room) => (
-                <RoomCard key={room.id} room={room} />
-              ))
-            }
-          </div>
+        {searchRooms === null ? (
+            <>
+                <PageHeader title="검색 결과"/>
+                <div>
+                {
+                searchRooms.map((room) => (
+                    <RoomCard key={room.id} room={room} />
+                ))
+                }
+                </div>
+            </>   
+        ) : <PageHeader title="검색 결과가 없습니다."/>}
         <BottomNavigation />
       </div>
     );
