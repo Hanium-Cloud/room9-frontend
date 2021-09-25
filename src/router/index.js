@@ -40,7 +40,7 @@ export default function Router() {
 
       {/* Guest */}
       <PrivateRoute exact path="/" component={Search} />
-      <PrivateRoute exact path="/result" component={SearchResult} />
+      <PrivateRoute exact path="/search" component={SearchResult} />
       <PrivateRoute exact path="/like" component={Like} />
       <PrivateRoute exact path="/message" component={Message} />
       <PrivateRoute exact path="/room/:roomId" component={RoomDetail} />

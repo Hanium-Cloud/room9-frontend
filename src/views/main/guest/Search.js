@@ -12,6 +12,7 @@ import {useRecoilValue} from "recoil";
 import {userState} from "../../../store/state";
 import {getPopularRooms, getRandomRooms} from "../../../api/room";
 import {useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
 
 const mainTextContainer = {
   marginTop: '10px',
@@ -22,6 +23,7 @@ const Search = (props) => {
   const user = useRecoilValue(userState);
   const [popularRooms, setPopularRooms] = useState([]);
   const [randomRooms, setRandomRooms] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getRandomRooms().then((response) => {
@@ -53,12 +55,16 @@ const Search = (props) => {
     })
   }, [])
 
+  const onClick = e => {
+    history.push("/search");
+  };
+
   return (
     <div style={{paddingBottom: '70px'}}>
       <AppHeader />
       <Row>
         <Col span={24} style={{padding: '15px', backgroundColor: Color.Primary} }>
-          <Input size="large" style={{borderRadius: '25px'}} prefix={<SearchOutlined style={{color: '#888888'}}/>} placeholder="마음에 드는 숙소를 찾아보세요!"/>
+          <Input size="large" style={{borderRadius: '25px'}} prefix={<SearchOutlined style={{color: '#888888'}}/>} placeholder="마음에 드는 숙소를 찾아보세요!" onClick={onClick} readOnly/>
         </Col>
       </Row>
       <Row>
