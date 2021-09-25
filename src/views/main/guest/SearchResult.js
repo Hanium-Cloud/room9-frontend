@@ -8,8 +8,8 @@ import BottomNavigation from "../../layouts/BottomNavigation";
 import RoomCard from "../../main/room/RoomCard"
 import MockData from "../../../constant/MockData";
 import styled from 'styled-components';
-import getSearchResult from "../../../api/search";
-import getAllRooms from "../../../api/room";
+import {getSearchResult} from "../../../api/search";
+import {getAllRooms} from "../../../api/room";
 
 const SearchBoxBlock = styled.div `
     padding: '10px 20px';
@@ -76,9 +76,20 @@ const SearchResult = (props) => {
     };
 
     const onButtonClick = e => {
-        //getSearchResult
         setVisible(false);
         console.log(filter);
+        getSearchResult(filter).then((response) => {
+            setSearchRooms([]);
+      
+            const rooms = response.data.room;
+            const results = rooms.map(room => ({
+              'roomId' : room.roomId,
+              'imageUrl' : room?.images[0]?.url,
+              'description' : room.title
+            }));
+      
+            setSearchRooms(results);
+          });
         setFilter({...filter,
             title: '',
             limitPrice: 0,
@@ -89,8 +100,18 @@ const SearchResult = (props) => {
     };
 
     useEffect(() => {
-        //getAllRooms
-        setSearchRooms(MockData.RoomCardMock);
+        getAllRooms().then((response) => {
+            setSearchRooms([]);
+      
+            const rooms = response.data.room;
+            const results = rooms.map(room => ({
+              'roomId' : room.roomId,
+              'imageUrl' : room?.images[0]?.url,
+              'description' : room.title
+            }));
+      
+            setSearchRooms(results);
+          });
     }, []);
 
     return (
