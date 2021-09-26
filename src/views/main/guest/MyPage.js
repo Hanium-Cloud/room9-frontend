@@ -12,9 +12,10 @@ import {changeRole} from "../../../api/user";
 const guestItems = [
   {icon: '', name: '예약 내역', path: '/mypage/reservation'},
   {icon: '', name: '내 리뷰', path: ''},
-  {icon: '', name: '호스트 전환', path: '/mypage/changerole'},
-  {icon: '', name: '커뮤니티', path: ''},
   {icon: '', name: '내정보 수정', path: '/mypage/modify'},
+  {icon: '', name: '호스트 전환', path: '/mypage/changerole'},
+  // {icon: '', name: '커뮤니티', path: ''},
+  {icon: '', name: '이용 약관', path: ''},
   {icon: '', name: '로그아웃', path: '/mypage/logout'},
 ];
 
