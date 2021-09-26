@@ -10,6 +10,7 @@ import {getRoomDetail, getRoomPrice} from "../../../api/room";
 import {useParams} from "react-router-dom";
 import {userState} from "../../../store/state";
 import {useRecoilValue} from 'recoil';
+import {bookRoom} from "../../../api/reservation";
 
 const PadContainer = {
     padding: '10px 20px',
@@ -79,6 +80,7 @@ const RoomReserve = (props) => {
     const [room, setRoom] = useState(MockData.InitRoom);
     const [personnel, setPersonnel] = useState(0);
     const [resultPrice, setResultPrice] = useState(0);
+    const [petWhether, setPetWhether] = useState(false);
 
     const now = new Date();
     const tomorrow = new Date();
@@ -134,7 +136,20 @@ const RoomReserve = (props) => {
             buyer_postcode: '123-456'
         }, function (rsp) {
             if (rsp.success) {
-                console.log(rsp);
+                let [startDate, finalDate] = selectedDayToDate(selectedDayRange);
+                startDate = toStringByFormatting(startDate);
+                finalDate = toStringByFormatting(finalDate);
+
+                bookRoom(
+                    roomId,
+                    startDate,
+                    finalDate,
+                    personnel,
+                    petWhether,
+                    JSON.stringify(rsp),
+                ).then((res) => {
+                    console.log(res);
+                });
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
@@ -213,10 +228,9 @@ const RoomReserve = (props) => {
                     <h4>반려견</h4>
                 </Col>
                 <Col span={12} style={{textAlign: 'right'}}>
-                    <Radio.Group onChange={() => {
-                    }} defaultValue="b">
-                        <Radio.Button value="a">있음</Radio.Button>
-                        <Radio.Button value="b">없음</Radio.Button>
+                    <Radio.Group onChange={setPetWhether} defaultValue={false}>
+                        <Radio.Button value={true}>있음</Radio.Button>
+                        <Radio.Button value={false}>없음</Radio.Button>
                     </Radio.Group>
                 </Col>
             </Row>
