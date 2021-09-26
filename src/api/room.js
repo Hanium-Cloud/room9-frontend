@@ -58,3 +58,7 @@ export const getAllRooms = async () => {
 export const getRoomPrice = async (roomId, personNum, startDate, finalDate) => {
   return await Axios.get(`/room/price/${roomId}?personnel=${personNum}&startDate=${startDate}&finalDate=${finalDate}`);
 }
+
+export const myRoom = async () => {
+  return await Axios.get('/room/myRoom');
+}
