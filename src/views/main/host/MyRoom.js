@@ -28,6 +28,7 @@ const MyRoom = (props) => {
               'price': room.price,
               'score': room.avgScore,
               'reviewCount': room.reviewCount,
+              'like': room.like,
           }));
           setRooms(results);
       })
