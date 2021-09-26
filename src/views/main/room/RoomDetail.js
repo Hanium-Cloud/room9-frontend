@@ -1,12 +1,19 @@
 import MockData from "../../../constant/MockData";
 import {Button, Carousel, Col, Row, Tabs} from "antd";
 import {useHistory, useParams} from 'react-router-dom';
-import {AppstoreOutlined, CameraOutlined, CommentOutlined, EnvironmentOutlined, StarFilled} from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  CameraOutlined,
+  CommentOutlined,
+  EnvironmentOutlined,
+  HeartOutlined, HeartTwoTone,
+  StarFilled
+} from "@ant-design/icons";
 import TagGroup from "../../components/TagGroup";
 import TopNavigation from "../../layouts/TopNavigation";
 import Review from "./Review";
 import {useEffect, useState} from "react";
-import {getRoomDetail} from "../../../api/room";
+import {getRoomDetail, likeRoom} from "../../../api/room";
 import RoomConf from "./RoomConf";
 
 const carouselContainer = {
@@ -48,6 +55,7 @@ const RoomDetail = (props) => {
   const history = useHistory();
   const [room, setRoom] = useState(MockData.InitRoom);
   const [reviews, setReviews] = useState([]);
+  const [isLike, setIsLike] = useState(false);
 
   useEffect(() => {
     getRoomDetail(roomId).then((result) => {
@@ -63,21 +71,39 @@ const RoomDetail = (props) => {
   return (
     <div style={{paddingBottom: '15px'}}>
       <TopNavigation title="방이름"/>
+
       <Carousel autoplay style={carouselContainer}>
         {
           props.mock | true ?
-            room.images.map((item, idx) => (
-              <div key={idx}>
-                <div style={{...carouselItemContainer, backgroundImage: `url('${item.url}')`}}>
-                  <span style={{color: 'white', fontSize: '20px'}}>{item.description}</span>
-                </div>
-              </div>
-            ))
-            :
-            <>
-            </>
+              room.images.map((item, idx) => (
+                  <div key={idx}>
+                    <div style={{...carouselItemContainer, backgroundImage: `url('${item.url}')`}}>
+                      <span style={{color: 'white', fontSize: '20px'}}>{item.description}</span>
+                    </div>
+                  </div>
+              ))
+              :
+              <>
+              </>
         }
       </Carousel>
+
+      <div style={{textAlign: 'right'}}>
+        <Button style={{
+          backgroundColor: isLike ? '#eb2f96' : '#eeeeee',
+          width: "48px",
+          height: "48px",
+          marginRight: "30px",
+          marginTop: '-20px',
+        }} icon={isLike ? <HeartTwoTone style={{fontSize: "30px"}} twoToneColor="#eb2f96" />
+            :
+            <HeartOutlined style={{fontSize: "30px", color: "#aaaaaa"}} />
+        } shape="circle" onClick={() => {
+          likeRoom(roomId).then((res) => {
+            setIsLike(res.data.currentStatus)
+          })
+        }} />
+      </div>
 
       <Row>
         <Col span={24} style={PadContainer}>
