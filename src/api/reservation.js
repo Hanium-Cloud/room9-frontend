@@ -8,4 +8,8 @@ export const bookRoom = async (roomId, startDate, finalDate, personnel, petWheth
         petWhether: petWhether,
         aboutPayment: aboutPayment,
     });
+};
+
+export const myBook = async () => {
+    return await Axios.get('/room/mybook');
 }

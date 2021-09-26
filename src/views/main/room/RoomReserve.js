@@ -1,4 +1,4 @@
-import {Col, Row, Radio, InputNumber, Button} from "antd";
+import {Col, Row, Radio, InputNumber, Button, message} from "antd";
 import styled from "styled-components";
 import MockData from "../../../constant/MockData";
 import {EnvironmentOutlined, StarFilled} from "@ant-design/icons";
@@ -7,7 +7,7 @@ import Color from "../../../constant/Color";
 import TopNavigation from "../../layouts/TopNavigation";
 import {useEffect, useState} from "react";
 import {getRoomDetail, getRoomPrice} from "../../../api/room";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {userState} from "../../../store/state";
 import {useRecoilValue} from 'recoil';
 import {bookRoom} from "../../../api/reservation";
@@ -76,9 +76,10 @@ function selectedDayToDate(selectedDayRange) {
 
 const RoomReserve = (props) => {
     let {roomId} = useParams();
+    const history = useHistory();
     const user = useRecoilValue(userState);
     const [room, setRoom] = useState(MockData.InitRoom);
-    const [personnel, setPersonnel] = useState(0);
+    const [personnel, setPersonnel] = useState(1);
     const [resultPrice, setResultPrice] = useState(0);
     const [petWhether, setPetWhether] = useState(false);
 
@@ -148,7 +149,8 @@ const RoomReserve = (props) => {
                     petWhether,
                     JSON.stringify(rsp),
                 ).then((res) => {
-                    console.log(res);
+                    message.success(`${room.title} 예약에 성공했습니다!`);
+                    history.push('/mypage/reservation')
                 });
             } else {
                 var msg = '결제에 실패하였습니다.';
