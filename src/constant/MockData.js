@@ -7,6 +7,27 @@ export const houseImage3 = '/images/mock/house_mock3.jpeg';
 export const houseImage4 = '/images/mock/house_mock4.jpeg';
 
 export default {
+  InitRoom: {
+    "roomId" : 1,
+    "username" : "로딩중",
+    "title" : "로딩중",
+    "location" : "로딩중",
+    "limitPeople" : 0,
+    "price" : 10000,
+    "like" : 0,
+    "images" : [ {
+      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호pngFIle.png"
+    }, {
+      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호jpgFIle.jpg"
+    } ],
+    "content" : "로딩중",
+    "rule" : "로딩중",
+    "charge" : 0,
+    "room_configuration" : [],
+    "room_amenity" : [],
+    "reviewCount": 0,
+    "avgScore": 0,
+  },
   BannerCarouselMockData: [
     {
       'roomId' : 1,

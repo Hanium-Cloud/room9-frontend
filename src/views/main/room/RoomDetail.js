@@ -1,12 +1,19 @@
 import MockData from "../../../constant/MockData";
 import {Button, Carousel, Col, Row, Tabs} from "antd";
 import {useHistory, useParams} from 'react-router-dom';
-import {AppstoreOutlined, CameraOutlined, CommentOutlined, EnvironmentOutlined, StarFilled} from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  CameraOutlined,
+  CommentOutlined,
+  EnvironmentOutlined,
+  HeartOutlined, HeartTwoTone,
+  StarFilled
+} from "@ant-design/icons";
 import TagGroup from "../../components/TagGroup";
 import TopNavigation from "../../layouts/TopNavigation";
 import Review from "./Review";
 import {useEffect, useState} from "react";
-import {getRoomDetail} from "../../../api/room";
+import {getRoomDetail, likeRoom} from "../../../api/room";
 import RoomConf from "./RoomConf";
 
 const carouselContainer = {
@@ -46,26 +53,9 @@ const regionStyle = {
 const RoomDetail = (props) => {
   let {roomId} = useParams();
   const history = useHistory();
-  const [room, setRoom] = useState({
-    "roomId" : 1,
-    "username" : "로딩중",
-    "title" : "로딩중",
-    "location" : "로딩중",
-    "limitPeople" : 0,
-    "price" : 10000,
-    "like" : 0,
-    "images" : [ {
-      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호pngFIle.png"
-    }, {
-      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호jpgFIle.jpg"
-    } ],
-    "content" : "로딩중",
-    "rule" : "로딩중",
-    "charge" : 0,
-    "room_configuration" : [],
-    "room_amenity" : []
-  });
+  const [room, setRoom] = useState(MockData.InitRoom);
   const [reviews, setReviews] = useState([]);
+  const [isLike, setIsLike] = useState(false);
 
   useEffect(() => {
     getRoomDetail(roomId).then((result) => {
@@ -75,27 +65,45 @@ const RoomDetail = (props) => {
   }, []);
 
   const goReserve = () => {
-    history.push('/room/10/reserve')
+    history.push(`/room/${room.roomId}/reserve`)
   }
 
   return (
     <div style={{paddingBottom: '15px'}}>
       <TopNavigation title="방이름"/>
+
       <Carousel autoplay style={carouselContainer}>
         {
           props.mock | true ?
-            room.images.map((item, idx) => (
-              <div key={idx}>
-                <div style={{...carouselItemContainer, backgroundImage: `url('${item.url}')`}}>
-                  <span style={{color: 'white', fontSize: '20px'}}>{item.description}</span>
-                </div>
-              </div>
-            ))
-            :
-            <>
-            </>
+              room.images.map((item, idx) => (
+                  <div key={idx}>
+                    <div style={{...carouselItemContainer, backgroundImage: `url('${item.url}')`}}>
+                      <span style={{color: 'white', fontSize: '20px'}}>{item.description}</span>
+                    </div>
+                  </div>
+              ))
+              :
+              <>
+              </>
         }
       </Carousel>
+
+      <div style={{textAlign: 'right'}}>
+        <Button style={{
+          backgroundColor: isLike ? '#eb2f96' : '#eeeeee',
+          width: "48px",
+          height: "48px",
+          marginRight: "30px",
+          marginTop: '-20px',
+        }} icon={isLike ? <HeartTwoTone style={{fontSize: "30px"}} twoToneColor="#eb2f96" />
+            :
+            <HeartOutlined style={{fontSize: "30px", color: "#aaaaaa"}} />
+        } shape="circle" onClick={() => {
+          likeRoom(roomId).then((res) => {
+            setIsLike(res.data.currentStatus)
+          })
+        }} />
+      </div>
 
       <Row>
         <Col span={24} style={PadContainer}>
@@ -104,8 +112,8 @@ const RoomDetail = (props) => {
               {room.title}
               <span>
               <StarFilled style={{color: '#F2C94C', marginLeft: '10px', fontSize: '10px'}}/>
-              <span style={{fontSize: '10px'}}>4.5</span>
-              <span style={{fontSize: '10px', color: '#888888'}}> (1,324)</span>
+              <span style={{fontSize: '10px'}}>{room.avgScore}</span>
+              <span style={{fontSize: '10px', color: '#888888'}}> ({room.reviewCount})</span>
           </span>
             </h3>
             <span style={regionStyle}>
@@ -114,7 +122,7 @@ const RoomDetail = (props) => {
         </span>
           </div>
           <div style={{float: 'right', lineHeight: '56px', verticalAlign: 'center'}}>
-            <p style={{margin: '0', fontSize: '22px', color: '#049FFF'}}>{"10,000"} 원 <span style={{color: '#888888'}}>/ 박</span>
+            <p style={{margin: '0', fontSize: '22px', color: '#049FFF'}}>{room.price.toLocaleString()} 원 <span style={{color: '#888888'}}>/ 박</span>
             </p>
           </div>
         </Col>
@@ -124,7 +132,7 @@ const RoomDetail = (props) => {
         <Tabs.TabPane tab={<span><AppstoreOutlined style={{marginRight: '0'}}/> 상세 정보</span>} key="1">
           <Row>
             <Col span={24} style={PadContainer}>
-              <h5>이지은님이 호스팅하는 펜션</h5>
+              <h5>{room.username}님이 호스팅하는 펜션</h5>
               <TagGroup tags={room.room_amenity.map(item => item.facility)}/>
             </Col>
           </Row>

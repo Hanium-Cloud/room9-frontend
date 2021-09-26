@@ -54,3 +54,19 @@ export const getRoomDetail = async (roomId) => {
 export const getAllRooms = async () => {
   return await Axios.get('/room');
 }
+
+export const getRoomPrice = async (roomId, personNum, startDate, finalDate) => {
+  return await Axios.get(`/room/price/${roomId}?personnel=${personNum}&startDate=${startDate}&finalDate=${finalDate}`);
+}
+
+export const myRoom = async () => {
+  return await Axios.get('/room/myRoom');
+}
+
+export const likeRoom = async(roomId) => {
+  return await Axios.post(`/room/good/${roomId}`);
+}
+
+export const myLikeRooms = async() => {
+  return await Axios.get('/room/MyWish');
+}

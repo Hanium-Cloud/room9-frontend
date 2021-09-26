@@ -48,8 +48,9 @@ const Search = (props) => {
         'name': room.title,
         'region': room.location,
         'price': room.price,
-        'score': 3.58,
-        'reviewCount': room.like,
+        'score': room.avgScore,
+        'reviewCount': room.reviewCount,
+        'like': room.like,
       }));
       setPopularRooms(results);
     })
