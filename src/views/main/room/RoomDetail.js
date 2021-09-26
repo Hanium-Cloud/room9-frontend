@@ -86,8 +86,8 @@ const RoomDetail = (props) => {
               {room.title}
               <span>
               <StarFilled style={{color: '#F2C94C', marginLeft: '10px', fontSize: '10px'}}/>
-              <span style={{fontSize: '10px'}}>4.5</span>
-              <span style={{fontSize: '10px', color: '#888888'}}> (1,324)</span>
+              <span style={{fontSize: '10px'}}>{room.avgScore}</span>
+              <span style={{fontSize: '10px', color: '#888888'}}> ({room.reviewCount})</span>
           </span>
             </h3>
             <span style={regionStyle}>
@@ -96,7 +96,7 @@ const RoomDetail = (props) => {
         </span>
           </div>
           <div style={{float: 'right', lineHeight: '56px', verticalAlign: 'center'}}>
-            <p style={{margin: '0', fontSize: '22px', color: '#049FFF'}}>{"10,000"} 원 <span style={{color: '#888888'}}>/ 박</span>
+            <p style={{margin: '0', fontSize: '22px', color: '#049FFF'}}>{room.price.toLocaleString()} 원 <span style={{color: '#888888'}}>/ 박</span>
             </p>
           </div>
         </Col>
@@ -106,7 +106,7 @@ const RoomDetail = (props) => {
         <Tabs.TabPane tab={<span><AppstoreOutlined style={{marginRight: '0'}}/> 상세 정보</span>} key="1">
           <Row>
             <Col span={24} style={PadContainer}>
-              <h5>이지은님이 호스팅하는 펜션</h5>
+              <h5>{room.username}님이 호스팅하는 펜션</h5>
               <TagGroup tags={room.room_amenity.map(item => item.facility)}/>
             </Col>
           </Row>
