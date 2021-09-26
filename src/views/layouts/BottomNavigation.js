@@ -36,14 +36,14 @@ const BottomItem = styled.div`
 const guestItems = [
   {path: '/', icon: SearchOutlined, name: '검색'},
   {path: '/like', icon: HeartOutlined, name: '찜'},
-  {path: '/message', icon: MailOutlined, name: '메시지'},
+  // {path: '/message', icon: MailOutlined, name: '메시지'},
   {path: '/mypage', icon: UserOutlined, name: '마이페이지'},
 ];
 
 const hostItems = [
   {path: '/host/myroom', icon: HomeOutlined, name: '내 숙소'},
   {path: '/host/reservation', icon: CheckCircleOutlined, name: '예약 확인'},
-  {path: '/host/message', icon: MailOutlined, name: '메시지'},
+  // {path: '/host/message', icon: MailOutlined, name: '메시지'},
   {path: '/mypage', icon: UserOutlined, name: '마이페이지'},
 ];
 
