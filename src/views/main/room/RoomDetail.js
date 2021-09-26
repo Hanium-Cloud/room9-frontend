@@ -46,25 +46,7 @@ const regionStyle = {
 const RoomDetail = (props) => {
   let {roomId} = useParams();
   const history = useHistory();
-  const [room, setRoom] = useState({
-    "roomId" : 1,
-    "username" : "로딩중",
-    "title" : "로딩중",
-    "location" : "로딩중",
-    "limitPeople" : 0,
-    "price" : 10000,
-    "like" : 0,
-    "images" : [ {
-      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호pngFIle.png"
-    }, {
-      "url" : "https://roomimg.s3.ap-northeast-2.amazonaws.com/도메인이름/랜덤으로생성된느번호jpgFIle.jpg"
-    } ],
-    "content" : "로딩중",
-    "rule" : "로딩중",
-    "charge" : 0,
-    "room_configuration" : [],
-    "room_amenity" : []
-  });
+  const [room, setRoom] = useState(MockData.InitRoom);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -75,7 +57,7 @@ const RoomDetail = (props) => {
   }, []);
 
   const goReserve = () => {
-    history.push('/room/10/reserve')
+    history.push(`/room/${room.roomId}/reserve`)
   }
 
   return (
