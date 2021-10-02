@@ -17,6 +17,7 @@ import HostReservation from "../views/main/host/HostReservation";
 import GuestReservation from "../views/main/reservation/GuestReservation";
 import MyRoomCreate from "../views/main/host/MyRoomCreate";
 import SearchResult from "../views/main/guest/SearchResult";
+import RoomReview from "../views/main/room/RoomReview";
 
 const ScrollToTop = (props) => {
   const { pathname } = useLocation();
@@ -45,6 +46,7 @@ export default function Router() {
       <PrivateRoute exact path="/message" component={Message} />
       <PrivateRoute exact path="/room/:roomId" component={RoomDetail} />
       <PrivateRoute exact path="/room/:roomId/reserve" component={RoomReserve} />
+      <PrivateRoute exact path="/room/:roomId/review" component={RoomReview} />
 
       <PrivateRoute exact path="/mypage" component={MyPage} />
       <PrivateRoute exact path="/mypage/changerole" component={MyPageChangeRole} />

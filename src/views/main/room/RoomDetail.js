@@ -15,6 +15,7 @@ import Review from "./Review";
 import {useEffect, useState} from "react";
 import {getRoomDetail, likeRoom} from "../../../api/room";
 import RoomConf from "./RoomConf";
+import {getReviews} from "../../../api/review";
 
 const carouselContainer = {
   borderRadius: '0 0 25px 25px',
@@ -62,6 +63,23 @@ const RoomDetail = (props) => {
       let room = result.data;
       setRoom(room);
     });
+
+    getReviews(null, roomId).then((res) => {
+      const reviews = res.data.data;
+
+
+      setReviews(
+        reviews.map((review) => ({
+          score: review.reviewScore,
+          title: review.reviewContent,
+          content: review.reviewContent,
+          createdBy: {
+            name: '',
+            avatarUrl: '',
+          }
+        }))
+      )
+    })
   }, []);
 
   const goReserve = () => {
@@ -181,7 +199,7 @@ const RoomDetail = (props) => {
         <Tabs.TabPane tab={<span><CommentOutlined style={{marginRight: '5px'}}/>리뷰</span>} key="3">
           <Row>
             <Col span={24}>
-              {MockData.ReviewDataMock.map((item) => (
+              {reviews  .map((item) => (
                 <Review key={item.reviewId} review={item}/>
               ))}
             </Col>

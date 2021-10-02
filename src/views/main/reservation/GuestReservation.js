@@ -1,7 +1,7 @@
 import TopNavigation from "../../layouts/TopNavigation";
-import {Col, Row} from "antd";
+import {Button, Col, Row} from "antd";
 import Color from "../../../constant/Color";
-import {CheckCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, EditOutlined, SearchOutlined} from "@ant-design/icons";
 import {useEffect, useState} from "react";
 import {myBook} from "../../../api/reservation";
 import {useHistory} from "react-router-dom";
@@ -58,7 +58,8 @@ const GuestReservation = (props) => {
           <div style={{padding: '5px 12px'}}>
             {
               myBooks.map((book, idx) => (
-                  <Row key={idx} style={{padding: '8px 12px', marginBottom: '10px', boxSizing: 'border-box', borderRadius: '5px', border: '1px solid #eeeeee'}} onClick={() => {
+                <div style={{marginBottom: '10px'}}>
+                  <Row key={idx} style={{padding: '8px 12px', boxSizing: 'border-box', borderRadius: '5px', border: '1px solid #eeeeee'}} onClick={() => {
                     history.push(`/room/${book.roomId}`);
                   }}>
                     <Col span={16}>
@@ -71,6 +72,15 @@ const GuestReservation = (props) => {
                       <p style={payValue}>50,000 원</p>
                     </Col>
                   </Row>
+                  <Row>
+                    <Col span={24} style={{textAlign: 'right', marginTop: '-10px'}}>
+                      <Button
+                        onClick={() => {history.push(`/room/${book.roomId}/review`)}}
+                        style={{marginRight: '20px', width: '40px', height: '40px'}}
+                        type="primary" shape="circle" icon={<EditOutlined />} />
+                    </Col>
+                  </Row>
+                </div>
               ))
             }
           </div>
