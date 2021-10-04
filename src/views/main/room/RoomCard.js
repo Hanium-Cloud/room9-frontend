@@ -42,7 +42,7 @@ const RoomCard = (props) => {
             {props?.room.name}
             <span>
               <StarFilled style={{color: '#F2C94C', marginLeft: '10px', fontSize: '10px'}} />
-              <span style={{fontSize: '10px'}} >{props?.room.score}</span>
+              <span style={{fontSize: '10px'}} >{props?.room.score?.toFixed(2)}</span>
               <span style={{fontSize: '10px', color: '#888888'}} > ({props?.room.reviewCount})</span>
               <HeartTwoTone style={{marginLeft: '5px', fontSize: '10px'}} twoToneColor="#eb2f96" />
               <span style={{fontSize: '10px'}} > {props?.room?.like ?? 0}</span>
