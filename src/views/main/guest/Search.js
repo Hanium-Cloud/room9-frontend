@@ -13,6 +13,7 @@ import {userState} from "../../../store/state";
 import {getPopularRooms, getRandomRooms} from "../../../api/room";
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
+import {getRecentReviews, getReviews} from "../../../api/review";
 
 const mainTextContainer = {
   marginTop: '10px',
@@ -23,6 +24,7 @@ const Search = (props) => {
   const user = useRecoilValue(userState);
   const [popularRooms, setPopularRooms] = useState([]);
   const [randomRooms, setRandomRooms] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -53,7 +55,24 @@ const Search = (props) => {
         'like': room.like,
       }));
       setPopularRooms(results);
-    })
+    });
+
+    getRecentReviews().then((res) => {
+      const reviews = res.data.data;
+
+
+      setReviews(
+        reviews.map((review) => ({
+          score: review.reviewScore,
+          title: review.reviewContent,
+          content: review.reviewContent,
+          createdBy: {
+            name: review.nickname,
+            avatarUrl: review.thumbnailImgUrl,
+          }
+        }))
+      )
+    });
   }, [])
 
   const onClick = e => {
@@ -81,7 +100,7 @@ const Search = (props) => {
           />
           <div style={{marginTop: '15px',}}>
             {
-              MockData.ReviewDataMock.map((item) => (
+              reviews.map((item) => (
                 <Review key={item.reviewId} review={item} card={true} />
               ))
             }

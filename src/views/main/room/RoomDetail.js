@@ -74,8 +74,8 @@ const RoomDetail = (props) => {
           title: review.reviewContent,
           content: review.reviewContent,
           createdBy: {
-            name: '',
-            avatarUrl: '',
+            name: review.nickname,
+            avatarUrl: review.thumbnailImgUrl,
           }
         }))
       )
