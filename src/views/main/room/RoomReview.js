@@ -95,7 +95,7 @@ const RoomReview = (props) => {
               {room.title}
               <span>
               <StarFilled style={{color: '#F2C94C', marginLeft: '10px', fontSize: '10px'}}/>
-              <span style={{fontSize: '10px'}}>{room.avgScore}</span>
+              <span style={{fontSize: '10px'}}>{room.avgScore?.toFixed(2)}</span>
               <span style={{fontSize: '10px', color: '#888888'}}> ({room.reviewCount})</span>
           </span>
             </h3>
